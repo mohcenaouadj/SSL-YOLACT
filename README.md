@@ -27,7 +27,7 @@ Yolact trained weights.
 
 
 5. Detect
-![Example 2](results/Detection-Mask/2011_002930.jpg)  
+![Example](https://github.com/mohcenaouadj/SSL-YOLACT/blob/master/readme_imgs/2011_002930.jpg)
   
 
 ```Shell
