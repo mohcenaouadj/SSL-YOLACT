@@ -85,7 +85,7 @@ class res101_coco:
         else:
             self.weight = args.weight
 
-        self.data_root = '/home/feiyu/Data/'
+        self.data_root = '/content/drive/MyDrive/data/benchmark_RELEASE/'
 
         if self.mode == 'train':
             self.train_imgs = self.data_root + 'coco2017/train2017/'
@@ -98,7 +98,7 @@ class res101_coco:
             self.lr = 0.001 * self.bs_factor
             self.warmup_init = self.lr * 0.1
             self.warmup_until = 500  # If adapted with bs_factor, inifinte loss may appear.
-            self.lr_steps = tuple([int(aa / self.bs_factor) for aa in (0, 280000, 560000, 620000, 680000)])
+            self.lr_steps = tuple([int(aa / self.bs_factor) for aa in (0, 100, 200, 500, 1000)])
 
             self.pos_iou_thre = 0.5
             self.neg_iou_thre = 0.4
@@ -171,7 +171,7 @@ class res50_pascal(res101_coco):
         if self.mode == 'train':
             self.train_imgs = self.data_root + 'pascal_sbd/img'
             self.train_ann = self.data_root + 'pascal_sbd/pascal_sbd_train.json'
-            self.lr_steps = tuple([int(aa / self.bs_factor) for aa in (0, 60000, 100000, 120000)])
+            self.lr_steps = tuple([int(aa / self.bs_factor) for aa in (0, 5000, 10000, 15000)])
             self.scales = [int(self.img_size / 544 * aa) for aa in (32, 64, 128, 256, 512)]
 
         if self.mode in ('train', 'val'):
@@ -226,7 +226,7 @@ def get_config(args, mode):
     if args.cuda:
         args.gpu_id = os.environ.get('CUDA_VISIBLE_DEVICES') if os.environ.get('CUDA_VISIBLE_DEVICES') else '0'
         if args.mode == 'train':
-            torch.cuda.set_device(args.local_rank)
+            torch.cuda.set_device(int(os.environ['LOCAL_RANK']))
             dist.init_process_group(backend='nccl', init_method='env://')
 
             # Only launched by torch.distributed.launch, 'WORLD_SIZE' can be add to environment variables.

@@ -24,7 +24,7 @@ parser.add_argument('--cfg', default='res101_coco', help='The configuration name
 parser.add_argument('--train_bs', type=int, default=8, help='total training batch size')
 parser.add_argument('--img_size', default=544, type=int, help='The image size for training.')
 parser.add_argument('--resume', default=None, type=str, help='The path of the weight file to resume training with.')
-parser.add_argument('--val_interval', default=4000, type=int,
+parser.add_argument('--val_interval', default=1000, type=int,
                     help='The validation interval during training, pass -1 to disable.')
 parser.add_argument('--val_num', default=-1, type=int, help='The number of images for test, set to -1 for all.')
 parser.add_argument('--traditional_nms', default=False, action='store_true', help='Whether to use traditional nms.')
@@ -77,7 +77,7 @@ if cfg.cuda:
     train_sampler = DistributedSampler(dataset, shuffle=True)
 
 # shuffle must be False if sampler is specified
-data_loader = data.DataLoader(dataset, cfg.bs_per_gpu, num_workers=cfg.bs_per_gpu // 2, shuffle=(train_sampler is None),
+data_loader = data.DataLoader(dataset, cfg.bs_per_gpu, num_workers=2, shuffle=(train_sampler is None),
                               collate_fn=train_collate, pin_memory=False, sampler=train_sampler)
 # data_loader = data.DataLoader(dataset, cfg.bs_per_gpu, num_workers=0, shuffle=False,
 #                               collate_fn=train_collate, pin_memory=True)

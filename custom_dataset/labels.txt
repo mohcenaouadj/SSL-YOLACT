@@ -1,5 +1,0 @@
-background
-dog
-person
-bear
-sheep

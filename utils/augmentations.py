@@ -30,8 +30,10 @@ def remove_small_box(boxes, masks, labels, area_limit):
 
 
 def to_01_box(hw, boxes):
-    boxes[:, [0, 2]] /= hw[1]
-    boxes[:, [1, 3]] /= hw[0]
+    b02 = boxes[:, [0, 2]] / hw[1]
+    b13 = boxes[:, [1, 3]] / hw[0]
+    boxes[:, [0, 2]] = b02
+    boxes[:, [1, 3]] = b13
     return boxes
 
 
@@ -173,7 +175,8 @@ def multi_scale_resize(img, masks=None, boxes=None, resize_range=None, during_tr
         resize_size = random.randint(resize_range[0], resize_range[1]) * 32
         img = cv2.resize(img, (resize_size, resize_size))
         scale = resize_size / ori_size
-        boxes *= scale
+        b = boxes * scale
+        boxes = b
 
         masks = masks.transpose((1, 2, 0))
         masks = cv2.resize(masks, (resize_size, resize_size))

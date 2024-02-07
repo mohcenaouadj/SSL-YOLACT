@@ -27,7 +27,7 @@ make_json = MakeJson()
 
 def evaluate(net, cfg, step=None):
     dataset = COCODetection(cfg, mode='val')
-    data_loader = data.DataLoader(dataset, 1, num_workers=4, shuffle=False, pin_memory=True, collate_fn=val_collate)
+    data_loader = data.DataLoader(dataset, 1, num_workers=2, shuffle=False, pin_memory=True, collate_fn=val_collate)
     ds = len(data_loader)
     progress_bar = ProgressBar(40, ds)
     timer.reset()
