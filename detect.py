@@ -23,7 +23,7 @@ def main():
     parser.add_argument('--video', default=None, type=str, help='The path of the video to evaluate.')
     parser.add_argument('--img_size', type=int, default=544, help='The image size for validation.')
     parser.add_argument('--traditional_nms', default=False, action='store_true', help='Whether to use traditional nms.')
-    parser.add_argument('--hide_mask', default=True, action='store_true', help='Hide masks in results.')
+    parser.add_argument('--hide_mask', default=False, action='store_true', help='Hide masks in results.')
     parser.add_argument('--hide_bbox', default=False, action='store_true', help='Hide boxes in results.')
     parser.add_argument('--hide_score', default=False, action='store_true', help='Hide scores in results.')
     parser.add_argument('--cutout', default=False, action='store_true', help='Cut out each object and save.')
