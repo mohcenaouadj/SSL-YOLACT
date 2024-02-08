@@ -15,6 +15,10 @@ git clone https://github.com/feiyuhuahuo/Yolact_minimal/
 # Build cython-nms 
 python setup.py build_ext --inplace
 ```
+Also (if needed) : 
+```shell
+! pip install tensorboardX TensorRT terminaltables onnxruntime-gpu -q
+```
 3. Modify `self.data_root` in 'res101_coco' in `config.py` according to your data folder. 
 4. Download weights.
 
@@ -45,6 +49,14 @@ python detect.py --weight=weights/best_30.4_res101_coco_340000.pth --video=video
 ```Shell
 tensorboard --logdir=tensorboard_log/res101_coco
 ```
+7. In case you want to retrain :
+
+You can download the pascal segmentation bounderies dataset from [here](https://drive.google.com/drive/folders/155KEfQj93gYNWLBOXmevqipf2S_Nd3h_?usp=sharing)  
+
+```shell
+!torchrun --nproc_per_node=1 --master_port=$((RANDOM)) train.py --cfg=res50_pascal
+```
+Note that the configuration here is for pascal voc dataset, for more details you should check the original repo.  
 
 ## Citation
 ```
