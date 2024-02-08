@@ -8,7 +8,7 @@ Works fine on Colab with T4 GPU.
 1. Create a colab netbook and make sure to adjuste the ressources to GPU.
 In a cell : 
 ```shell
-git clone https://github.com/feiyuhuahuo/Yolact_minimal/
+git clone https://github.com/mohcenaouadj/SSL-YOLACT/
 ```
 2. Install dependencies
 ```Shell
@@ -41,13 +41,13 @@ python detect.py --best_38.66_res50_pascal_12000.pth --image=images
 ```
 ```Shell
 # To detect videos, pass the path of video, detected video will be saved in `results/videos`:
-python detect.py --weight=weights/best_30.4_res101_coco_340000.pth --video=videos/1.mp4
+python detect.py --weight=weights/best_38.66_res50_pascal_12000.pth --video=videos/1.mp4
 # Use --real_time to detect real-timely.
-python detect.py --weight=weights/best_30.4_res101_coco_340000.pth --video=videos/1.mp4 --real_time
+python detect.py --weight=weights/best_38.66_res50_pascal_12000.pth --video=videos/1.mp4 --real_time
 ```
 6. Use tensorboard
 ```Shell
-tensorboard --logdir=tensorboard_log/res101_coco
+tensorboard --logdir=tensorboard_log/res50_pascal
 ```
 7. In case you want to retrain :
 
